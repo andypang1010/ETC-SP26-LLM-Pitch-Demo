@@ -66,5 +66,5 @@
     "explorer.fileNesting.patterns": {
         "*.sln": "*.csproj"
     },
-    "dotnet.defaultSolution": "Pitch Demo.sln"
+    "dotnet.defaultSolution": "ETC-SP26-LLM-Pitch-Demo.sln"
 }
