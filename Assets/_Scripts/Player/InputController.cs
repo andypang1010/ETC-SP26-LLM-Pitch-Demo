@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InputController : MonoBehaviour
 {
@@ -10,12 +11,8 @@ public class InputController : MonoBehaviour
     public KeyCode crouchKey = KeyCode.LeftControl;
     public KeyCode altCrouchKey = KeyCode.LeftCommand;
     public KeyCode jumpKey = KeyCode.Space;
-    public KeyCode tagKey = KeyCode.T;
-    public KeyCode pickupKey = KeyCode.E;
-    public KeyCode bulletTimeKey = KeyCode.Q;
-    public KeyCode throwKey = KeyCode.Mouse0;
-    public KeyCode attackKey = KeyCode.Mouse1;
-    public KeyCode teleportKey = KeyCode.Mouse2;
+    public KeyCode interactKey = KeyCode.E;
+    public KeyCode talkKey = KeyCode.Return;
 
     void Awake() {
         if (Instance != null) {
@@ -53,35 +50,13 @@ public class InputController : MonoBehaviour
         return Input.GetKeyDown(jumpKey);
     }
 
-    public bool GetTagDown() {
-        return Input.GetKeyDown(tagKey);
+    public bool GetInteractDown()
+    {
+        return Input.GetKeyDown(interactKey);
     }
-
-    public bool GetTagHold() {
-        return Input.GetKey(tagKey);
-    }
-
-    public bool GetTagUp() {
-        return Input.GetKeyUp(tagKey);
-    }
-
-    public bool GetPickupDown() {
-        return Input.GetKeyDown(pickupKey);
-    }
-
-    public bool GetThrowDown() {
-        return Input.GetKeyDown(throwKey);
-    }
-
-    public bool GetBulletTimeDown() {
-        return Input.GetKeyDown(bulletTimeKey);
-    }
-
-    public bool GetTeleportDown() {
-        return Input.GetKeyDown(teleportKey);
-    }
-
-    public bool GetAttackDown() {
-        return Input.GetKeyDown(attackKey);
+    
+    public bool GetTalkDown()
+    {
+        return Input.GetKeyDown(talkKey);
     }
 }

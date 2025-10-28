@@ -13,6 +13,7 @@ public class TestGame : MonoBehaviour
 
     PlayerMovement playerMovement;
     PlayerCamera playerCamera;
+    PlayerInteract playerInteract;
     LLMCharacter npcLLMCharacter;
 
     [Header("Conversation State")]
@@ -42,24 +43,46 @@ public class TestGame : MonoBehaviour
 
         playerMovement = player.GetComponent<PlayerMovement>();
         playerCamera = player.GetComponent<PlayerCamera>();
+        playerInteract = player.GetComponent<PlayerInteract>();
         npcLLMCharacter = npc.GetComponent<LLMCharacter>();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (!playerInteract.hasNPCInRange)
         {
-            // Start conversation
-            if (!isTalking)
+            if (isTalking)
             {
-                isTalking = true;
-
-                // Show input field and focus
-                inputFieldGameObject.SetActive(true);
-                playerInputField.ActivateInputField();
+                ClearCurrentConversation();
             }
 
-            else if (isTalking && playerInputField.text == "" && !hasInput && !hasResponse && !hasFinishedResponse)
+            return;
+        }
+
+        // Start conversation
+        if (InputController.Instance.GetInteractDown() && !isTalking)
+        {
+            isTalking = true;
+
+            // Show input field and focus
+            inputFieldGameObject.SetActive(true);
+            playerInputField.ActivateInputField();
+        }
+
+        if (InputController.Instance.GetTalkDown())
+        {
+            // // Start conversation
+            // if (!isTalking)
+            // {
+            //     isTalking = true;
+
+                //     // Show input field and focus
+                //     inputFieldGameObject.SetActive(true);
+                //     playerInputField.ActivateInputField();
+                // }
+
+            // End conversation if input is empty
+            if (isTalking && playerInputField.text == "" && !hasInput && !hasResponse && !hasFinishedResponse)
             {
                 isTalking = false;
                 inputFieldGameObject.SetActive(false);
@@ -100,6 +123,20 @@ public class TestGame : MonoBehaviour
 
         playerMovement.enabled = !isTalking;
         playerCamera.enabled = !isTalking;
+    }
+
+    private void ClearCurrentConversation()
+    {
+        isTalking = false;
+        hasInput = false;
+        hasResponse = false;
+        hasFinishedResponse = false;
+
+        inputText = "";
+        responseText = "";
+
+        inputFieldGameObject.SetActive(false);
+        responseGameObject.SetActive(false);
     }
 
     void SaveResponse(string response)
