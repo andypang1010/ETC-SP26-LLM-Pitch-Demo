@@ -36,4 +36,5 @@
   <Project Path="Unity.InputSystem.TestFramework.csproj" />
   <Project Path="Unity.VisualScripting.Shared.Editor.csproj" />
   <Project Path="Unity.EditorCoroutines.Editor.csproj" />
+  <Project Path="Unity.PlasticSCM.Editor.Entities.csproj" />
 </Solution>
